@@ -20,7 +20,11 @@ Geef voor elke mannelijke speler wiens naam minstens 2 keer de letter 'e' bevat 
 Sorteer op naam en functie.
 
 ```SQL
-
+SELECT S.naam, S.geslacht, B.functie
+FROM spelers S left outer join bestuursleden B on S.spelersnr = b.spelersnr and eind_datum is null
+WHERE naam like '%e%e%'
+	and geslacht = 'M'
+ORDER BY 1,3
 ```
 
 ## Oefening 3
