@@ -45,3 +45,13 @@ ORDER BY 2, 3
 ```
 ### notes
 meer conditions na de ON is meer blij
+
+## Oefening 4
+Geef een aflopend gesorteerde lijst van de nummers van alle spelers waarvoor nog geen boete werd betaald en die nog nooit in het bestuur van de tennisvereniging hebben gezeten.
+```SQL
+SELECT SF.spelersnr
+FROM spelers SF left outer join boetes B on SF.spelersnr = B.spelersnr
+	left outer join bestuursleden BL on BL.spelersnr = SF.spelersnr
+	inner join spelers S on S.spelersnr = SF.spelersnr and betalingsnr is null and functie is null
+ORDER BY 1 desc
+```
