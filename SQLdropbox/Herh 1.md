@@ -56,3 +56,14 @@ FROM spelers SF left outer join boetes B on SF.spelersnr = B.spelersnr
 	inner join spelers S on S.spelersnr = SF.spelersnr and betalingsnr is null and functie is null
 ORDER BY 1 desc
 ```
+
+## Oefening 5
+
+Geef de nummers van alle spelers (ook al hebben ze geen wedstrijd gespeeld), een lijst van de nummers van alle wedstrijden die ze gewonnen hebben, alsook het verschil in sets waarmee ze gewonnen hebben.
+Toon je resultaten gesorteerd volgens dit verschil van groot naar klein en oplopend op spelersnr.
+
+```SQL
+SELECT S.spelersnr, W.wedstrijdnr, (W.gewonnen - W.verloren) as verschil
+FROM spelers S LEFT OUTER JOIN wedstrijden W on S.spelersnr = W.spelersnr and gewonnen > verloren
+ORDER BY 3 desc, 1
+```
