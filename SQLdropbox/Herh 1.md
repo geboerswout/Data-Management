@@ -12,7 +12,6 @@ from bestuursleden be LEFT OUTER JOIN spelers s on be.spelersnr = s.spelersnr
 where be.eind_datum is null
 order by 1,2
 ```
-<br>
 
 ## Oefening 2
 
@@ -47,7 +46,9 @@ ORDER BY 2, 3
 meer conditions na de ON is meer blij
 
 ## Oefening 4
+
 Geef een aflopend gesorteerde lijst van de nummers van alle spelers waarvoor nog geen boete werd betaald en die nog nooit in het bestuur van de tennisvereniging hebben gezeten.
+
 ```SQL
 SELECT SF.spelersnr
 FROM spelers SF left outer join boetes B on SF.spelersnr = B.spelersnr
