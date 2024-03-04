@@ -23,7 +23,7 @@ Sorteer op naam en functie.
 
 ```
 
-## Oefening 3 <mark>WERKT NIET HELEMAAL</mark>
+## Oefening 3
 
 Geef per team de verloren wedstrijden. Zorg dat teams zonder verloren wedstrijden ook in de output verschijnen.
 Duid per wedstrijd aan of het om een actief bestuurslid gaat.
@@ -32,16 +32,12 @@ Sorteer op divisie en wedstrijdnummer.
 ```SQL
 SELECT T.teamnr, divisie, wedstrijdnr, W.spelersnr, 
 	CASE
-		WHEN huidige_functie is not null THEN 'actief'
-		ELSE '-'
+		WHEN functie is null THEN '-'
+		ELSE 'actief'
 	END as bestuurslid
-FROM teams T left outer join wedstrijden W on T.teamnr = W.teamnr
-	left join (
-		SELECT spelersnr, 
-			MAX(CASE WHEN eind_datum IS NULL THEN functie ELSE '-' END) AS huidige_functie
-		FROM bestuursleden
-		GROUP BY spelersnr
-		) as B on B.spelersnr = W.spelersnr 
-WHERE (gewonnen < verloren or gewonnen is null)
+FROM teams T left outer join wedstrijden W on T.teamnr = W.teamnr and verloren > gewonnen 
+	left outer join bestuursleden B on B.spelersnr = W.spelersnr and eind_datum is null 
 ORDER BY 2, 3
 ```
+### notes
+meer conditions na de ON is meer blij
