@@ -67,3 +67,40 @@ SELECT S.spelersnr, W.wedstrijdnr, (W.gewonnen - W.verloren) as verschil
 FROM spelers S LEFT OUTER JOIN wedstrijden W on S.spelersnr = W.spelersnr and gewonnen > verloren
 ORDER BY 3 desc, 1
 ```
+
+## Oefening 6
+
+Geef het spelersnummer en bondsnummer van alle spelers die jonger zijn dan de speler met bondsnummer 8467.
+gebruik een INNER JOIN. Sorteer 1,2
+
+```SQL
+SELECT S1.spelersnr, S1.bondsnr
+FROM spelers S1 inner JOIN 
+	spelers S2 on S2.bondsnr = '8467' 
+		and S1.geb_datum > S2.geb_datum
+ORDER BY 1,2
+```
+
+## Oefening 7
+
+Maak een lijst van alle mannelijke aanvoerders van een team en hun gespeelde wedstrijden.
+Hierbij toon je voor deze spelers het spelersnummer en de volledige naam, voor het team de divisie en voor de wedstrijd het wedstrijdnummer.
+Sorteer ook aflopend op het wedstrijdnummer.
+
+<mark>ONVOLLEDIG</mark>
+
+```SQL
+SELECT S.spelersnr, S.naam, S.voorletters, T.divisie, W.wedstrijdnr
+FROM spelers S INNER JOIN teams T on S.spelersnr = T.spelersnr and S.geslacht = 'M'
+	LEFT OUTER JOIN wedstrijden W on W.teamnr = T.teamnr and W.spelersnr = T.spelersnr
+ORDER BY 5 DESC
+```
+
+<mark>ONVOLLEDIG</mark>
+
+```SQL
+SELECT S.spelersnr, S.naam, S.voorletters, T.divisie, W.wedstrijdnr
+FROM teams T LEFT OUTER JOIN spelers S on S.spelersnr = T.spelersnr  and S.geslacht = 'M' and T.spelersnr is not null
+	LEFT OUTER JOIN wedstrijden W on W.teamnr = T.teamnr and W.spelersnr = T.spelersnr
+ORDER BY 5 DESC
+```
