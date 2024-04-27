@@ -28,3 +28,26 @@ where spelersnr not in (
 	and gewonnen > verloren
 order by 2
 ```
+
+## Oefening 3
+
+Geef van elke speler het spelersnr, de naam en het verschil tussen zijn of haar jaar van toetreding en het gemiddeld jaar van toetreding van de spelers die in dezelfde plaats wonen. Sorteer op spelersnr. Toon 3 getallen na de komma, zet het verschil om naar het numeric type met precisie van 5 en een schaal van 3.
+
+```SQL
+```
+
+## Oefening 4
+
+Je kan per speler berekenen hoeveel boetes die speler heeft gehad en wat het totaalbedrag per speler is. Pas nu deze querie aan zodat per verschillend aantal boetes wordt getoond hoe vaak dit aantal boetes voorkwam.Sorteer eerst op de eerste kolom en daarna op de tweede kolom.
+
+```SQL
+select aantalboetes as a, count(aantalboetes)
+from (
+	select count(*) as aantalboetes 
+	from boetes
+  	group by spelersnr) T
+group by aantalboetes
+order by 1,2
+```
+
+
