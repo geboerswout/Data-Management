@@ -104,3 +104,11 @@ FROM teams T LEFT OUTER JOIN spelers S on S.spelersnr = T.spelersnr  and S.gesla
 	LEFT OUTER JOIN wedstrijden W on W.teamnr = T.teamnr and W.spelersnr = T.spelersnr
 ORDER BY 5 DESC
 ```
+
+## Oefening 8
+
+Geef voor de actieve bestuursleden zonder boete hun laatste gespeelde wedstrijd (die met het hoogste wedstrijdnummer).
+Sorteer aflopend op spelersnr.
+
+```SQL
+```
