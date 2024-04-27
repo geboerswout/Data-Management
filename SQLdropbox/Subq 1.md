@@ -13,3 +13,18 @@ from wedstrijden W left outer join (
   group by spelersnr) B on W.spelersnr = B.spelersnr
 order by 2,1
 ```
+
+## Oefening 2
+
+Geef voor alle spelers die geen penningmeester zijn of zijn geweest alle gewonnen wedstrijden, gesorteerd op wedstrijdnummer.
+
+```SQL
+select spelersnr, wedstrijdnr 
+from wedstrijden
+where spelersnr not in (
+	select spelersnr
+	from bestuursleden
+	where functie = 'Penningmeester')
+	and gewonnen > verloren
+order by 2
+```
