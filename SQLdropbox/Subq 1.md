@@ -51,3 +51,15 @@ order by 1,2
 ```
 
 
+## Oefening 5
+
+Geef van alle spelers het verschil tussen het jaar van toetreding en het geboortejaar, maar geef alleen die spelers waarvan dat verschil groter is dan 20. Sorteer deze gegevens beginnend bij de eerste kolom, eindigend bij de laatste kolom.
+
+```SQL
+select S.spelersnr, naam, voorletters, toetredingsleeftijd 
+from spelers S right outer join 
+	(select (jaartoe - extract(YEAR from geb_datum)) as toetredingsleeftijd, spelersnr
+	from spelers) t using(spelersnr)
+where toetredingsleeftijd > 20
+order by 1, 2, 3, 4
+```
