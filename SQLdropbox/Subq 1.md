@@ -18,6 +18,7 @@ order by 2,1
 
 Geef voor alle spelers die geen penningmeester zijn of zijn geweest alle gewonnen wedstrijden, gesorteerd op wedstrijdnummer.
 
+<mark>ONVOLLEDIG</mark>
 ```SQL
 select spelersnr, wedstrijdnr 
 from wedstrijden
@@ -62,4 +63,22 @@ from spelers S right outer join
 	from spelers) t using(spelersnr)
 where toetredingsleeftijd > 20
 order by 1, 2, 3, 4
+```
+
+## Oefening 6
+
+Geef voor elke aanvoerder het spelersnr, de naam en het aantal boetes dat voor hem of haar betaald is en het aantal teams dat hij of zij aanvoert. Aanvoerders zonder boetes mogen niet getoond worden. Sorteer, beginnend bij de eerste kolom, eindigend bij de laatste kolom.
+
+```SQL
+select S.spelersnr, S.naam, S.voorletters, aantalboetes, aantalteams
+from spelers S inner join teams T on S.spelersnr = T.spelersnr
+	inner join
+(		select spelersnr, count(*) as aantalboetes
+		from boetes
+		group by spelersnr) AAB on S.spelersnr = AAB.spelersnr and aantalboetes > 0
+	inner join 
+(		select spelersnr, count(*) as aantalteams
+		from teams
+		group by spelersnr) AAT on S.spelersnr = AAT.spelersnr
+order by 1, 2, 3, 4, 5
 ```
